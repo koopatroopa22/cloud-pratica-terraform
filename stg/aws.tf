@@ -8,3 +8,9 @@ module "subnet" {
   env    = "stg"
   vpc_id = module.vpc.id_cloud_pratica
 }
+
+module "igw" {
+  source = "../modules/aws/igw"
+  env    = "stg"
+  vpc_id = module.vpc.id_cloud_pratica
+}
