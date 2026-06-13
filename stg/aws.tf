@@ -42,3 +42,6 @@ module "secretsmanager" {
   env    = "stg"
 }
 
+module "sqs" {
+  source = "../modules/aws/sqs"
+}
