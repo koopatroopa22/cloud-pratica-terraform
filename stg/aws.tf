@@ -36,3 +36,9 @@ module "ecr" {
   source = "../modules/aws/ecr"
   env    = "stg"
 }
+
+module "secretsmanager" {
+  source = "../modules/aws/secrets_manager"
+  env    = "stg"
+}
+
