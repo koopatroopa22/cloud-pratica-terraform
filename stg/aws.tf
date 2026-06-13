@@ -24,3 +24,11 @@ module "route_table" {
   private_subnet_ids       = local.private_subnet_ids
   nat_network_interface_id = "eni-0df7a068443de3c11"
 }
+
+module "security_group" {
+  source                     = "../modules/aws/security_group"
+  env                        = "stg"
+  vpc_id                     = module.vpc.id_cloud_pratica
+  private_subnet_cidr_blocks = local.private_subnet_cidr_blocks
+}
+
