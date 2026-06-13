@@ -52,3 +52,8 @@ module "ses" {
     domain = local.base_host
   }
 }
+
+module "iam_role" {
+  source = "../modules/aws/iam_role"
+  env    = "stg"
+}
