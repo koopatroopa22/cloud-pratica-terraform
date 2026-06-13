@@ -36,4 +36,3 @@ module "ecr" {
   source = "../modules/aws/ecr"
   env    = "stg"
 }
-
