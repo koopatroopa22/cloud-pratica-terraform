@@ -41,3 +41,23 @@ resource "aws_vpc_security_group_ingress_rule" "cp_alb" {
   to_port           = 443
   ip_protocol       = "tcp"
 }
+
+resource "aws_security_group" "cp_nat" {
+  name        = "cp-nat-${var.env}"
+  description = "net sg"
+  vpc_id      = var.vpc_id
+}
+
+resource "aws_vpc_security_group_egress_rule" "cp_nat" {
+  security_group_id = aws_security_group.cp_nat.id
+  cidr_ipv4         = "0.0.0.0/0"
+  ip_protocol       = "-1"
+}
+
+resource "aws_vpc_security_group_ingress_rule" "nat" {
+  for_each = toset(var.private_subnet_cidr_blocks)
+
+  security_group_id = aws_security_group.cp_nat.id
+  cidr_ipv4         = each.value
+  ip_protocol       = "-1"
+}

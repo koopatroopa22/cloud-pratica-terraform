@@ -31,4 +31,3 @@ module "security_group" {
   vpc_id                     = module.vpc.id_cloud_pratica
   private_subnet_cidr_blocks = local.private_subnet_cidr_blocks
 }
-
