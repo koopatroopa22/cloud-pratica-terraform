@@ -63,3 +63,23 @@ resource "aws_vpc_security_group_ingress_rule" "nat" {
   cidr_ipv4         = each.value
   ip_protocol       = "-1"
 }
+
+resource "aws_security_group" "cp_slack_metrics_backend" {
+  name        = "cp-slack-metrics-backend-${var.env}"
+  description = "backend sg"
+  vpc_id      = var.vpc_id
+}
+
+resource "aws_vpc_security_group_egress_rule" "cp_slack_metrics_backend" {
+  security_group_id = aws_security_group.cp_slack_metrics_backend.id
+  cidr_ipv4         = "0.0.0.0/0"
+  ip_protocol       = "-1"
+}
+
+resource "aws_vpc_security_group_ingress_rule" "cp_slack_metrics_backend" {
+  security_group_id            = aws_security_group.cp_slack_metrics_backend.id
+  referenced_security_group_id = aws_security_group.cp-alb.id
+  from_port                    = 8080
+  to_port                      = 8080
+  ip_protocol                  = "tcp"
+}
