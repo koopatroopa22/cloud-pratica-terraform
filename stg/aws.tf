@@ -45,3 +45,10 @@ module "secretsmanager" {
 module "sqs" {
   source = "../modules/aws/sqs"
 }
+
+module "ses" {
+  source = "../modules/aws/ses"
+  munchakuppa = {
+    domain = local.base_host
+  }
+}

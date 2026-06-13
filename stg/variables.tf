@@ -14,4 +14,6 @@ locals {
     module.subnet.cidr_block_private_1a,
     module.subnet.cidr_block_private_1c,
   ]
+
+  base_host = "stg.munchakuppa.link"
 }
